@@ -1,0 +1,37 @@
+# Ignore Python cache and environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Node-related (if you ever add it for frontend tools)
+node_modules/
+npm-debug.log
+
+# Editor and system-specific files
+*.log
+*.DS_Store
+*.vscode/
+*.idea/
+
+# Ignore build outputs or temporary files
+dist/
+build/
+*.bak
+*.tmp
+*.swp
+
+# Ignore compiled assets (if any)
+*.min.js
+*.min.css
+*.map
+
+# Environment and secret keys
+.env
+*.secret
+
+# Ignore database or local test files
+*.sqlite3
+*.db
