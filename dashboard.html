@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCredit - Banker Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>FarmCredit</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">JD</div>
+                <div class="user-details">
+                    <h3>John Doe</h3>
+                    <p>Senior Loan Officer</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <span class="material-icons">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="evaluate-farmer.html">
+                        <span class="material-icons">assessment</span>
+                        <span>Evaluate Farmer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="applications.html">
+                        <span class="material-icons">description</span>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <span class="material-icons">insights</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="logout">
+                <a href="index.html">
+                    <span class="material-icons">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <h1>Welcome back, John</h1>
+                    <p>Here's what's happening with your farmer applications today.</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <span class="material-icons">search</span>
+                        <input type="text" placeholder="Search farmers...">
+                    </div>
+                    <div class="notification" data-tooltip="Notifications">
+                        <span class="material-icons">notifications</span>
+                        <span class="badge">2</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Overview -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">add_circle</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>New Applications</h3>
+                        <p>24</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Approved Loans</h3>
+                        <p>42</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">hourglass_empty</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending Reviews</h3>
+                        <p>18</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <span class="material-icons">payments</span>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Loan Value</h3>
+                        <p>$245,000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Recent Applications -->
+                <div class="grid-card recent-applications">
+                    <div class="card-header">
+                        <h2>Recent Applications</h2>
+                        <a href="applications.html" class="view-all">View All</a>
+                    </div>
+                    <div class="applications-list">
+                        <div class="application-item" data-id="app001">
+                            <div class="farmer-info">
+                                <div class="farmer-avatar">RP</div>
+                                <div class="farmer-details">
+                                    <h4>Raj Patel</h4>
+                                    <p>Karnataka, India</p>
+                                </div>
+                            </div>
+                            <div class="application-status pending">Pending</div>
+                            <div class="application-actions">
+                                <button class="action-btn" data-action="view" data-tooltip="View Details">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                                <button class="action-btn" data-action="approve" data-tooltip="Approve">
+                                    <span class="material-icons">check</span>
+                                </button>
+                                <button class="action-btn" data-action="reject" data-tooltip="Reject">
+                                    <span class="material-icons">close</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="application-item" data-id="app002">
+                            <div class="farmer-info">
+                                <div class="farmer-avatar">AS</div>
+                                <div class="farmer-details">
+                                    <h4>Anita Singh</h4>
+                                    <p>Punjab, India</p>
+                                </div>
+                            </div>
+                            <div class="application-status approved">Approved</div>
+                            <div class="application-actions">
+                                <button class="action-btn" data-action="view" data-tooltip="View Details">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="application-item" data-id="app003">
+                            <div class="farmer-info">
+                                <div class="farmer-avatar">MK</div>
+                                <div class="farmer-details">
+                                    <h4>Mohammed Khan</h4>
+                                    <p>Gujarat, India</p>
+                                </div>
+                            </div>
+                            <div class="application-status pending">Pending</div>
+                            <div class="application-actions">
+                                <button class="action-btn" data-action="view" data-tooltip="View Details">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                                <button class="action-btn" data-action="approve" data-tooltip="Approve">
+                                    <span class="material-icons">check</span>
+                                </button>
+                                <button class="action-btn" data-action="reject" data-tooltip="Reject">
+                                    <span class="material-icons">close</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="application-item" data-id="app004">
+                            <div class="farmer-info">
+                                <div class="farmer-avatar">SR</div>
+                                <div class="farmer-details">
+                                    <h4>Sita Reddy</h4>
+                                    <p>Andhra Pradesh, India</p>
+                                </div>
+                            </div>
+                            <div class="application-status rejected">Rejected</div>
+                            <div class="application-actions">
+                                <button class="action-btn" data-action="view" data-tooltip="View Details">
+                                    <span class="material-icons">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Credit Score Distribution -->
+                <div class="grid-card credit-distribution">
+                    <div class="card-header">
+                        <h2>Credit Score Distribution</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="creditDistributionChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="color-box excellent"></span>
+                            <span>Excellent</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box good"></span>
+                            <span>Good</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box fair"></span>
+                            <span>Fair</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="color-box poor"></span>
+                            <span>Poor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Alerts -->
+                <div class="grid-card weather-alerts">
+                    <div class="card-header">
+                        <h2>Regional Weather Alerts</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="alerts-list">
+                        <div class="alert-item">
+                            <div class="alert-icon drought">
+                                <span class="material-icons">wb_sunny</span>
+                            </div>
+                            <div class="alert-details">
+                                <h4>Drought Warning</h4>
+                                <p>Karnataka, Maharashtra - Next 14 days</p>
+                            </div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon flood">
+                                <span class="material-icons">water</span>
+                            </div>
+                            <div class="alert-details">
+                                <h4>Flood Risk</h4>
+                                <p>Kerala, Tamil Nadu - Next 7 days</p>
+                            </div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon frost">
+                                <span class="material-icons">ac_unit</span>
+                            </div>
+                            <div class="alert-details">
+                                <h4>Frost Advisory</h4>
+                                <p>Himachal Pradesh - Next 3 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evaluate Farmer CTA -->
+                <div class="grid-card evaluate-farmer">
+                    <div class="cta-content">
+                        <h2>Evaluate a Farmer</h2>
+                        <p>Use our alternative credit evaluation system to assess farmers based on non-traditional data sources.</p>
+                        <a href="evaluate-farmer.html" class="cta-button">
+                            <span class="material-icons">assessment</span>
+                            Start Evaluation
+                        </a>
+                    </div>
+                    <div class="cta-image">
+                        <img src="img/farmer-evaluate.png" alt="Farmer Evaluation">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 

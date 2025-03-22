@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCredit - GIS Analytics</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/gis-analytics.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar (Same as dashboard.html) -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>FarmCredit</h2>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html">
+                        <span class="material-icons">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="loan-application.html">
+                        <span class="material-icons">description</span>
+                        <span>Loan Application</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="gis-analytics.html">
+                        <span class="material-icons">map</span>
+                        <span>GIS Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="weather.html">
+                        <span class="material-icons">cloud</span>
+                        <span>Weather</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profile.html">
+                        <span class="material-icons">person</span>
+                        <span>Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-content">
+                    <h1>GIS Analytics</h1>
+                    <div class="map-controls">
+                        <select id="mapLayer">
+                            <option value="soil">Soil Health</option>
+                            <option value="water">Water Availability</option>
+                            <option value="yield">Past Yields</option>
+                        </select>
+                        <button class="btn" id="refreshMap">
+                            <span class="material-icons">refresh</span>
+                            Refresh Data
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="gis-container">
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+                <div class="analytics-sidebar">
+                    <div class="card">
+                        <h3>Land Analysis</h3>
+                        <div class="analysis-item">
+                            <span>Total Area</span>
+                            <strong>50 acres</strong>
+                        </div>
+                        <div class="analysis-item">
+                            <span>Soil Quality</span>
+                            <strong>Good</strong>
+                        </div>
+                        <div class="analysis-item">
+                            <span>Water Sources</span>
+                            <strong>2 wells</strong>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Crop Recommendations</h3>
+                        <ul class="crop-list">
+                            <li>
+                                <span class="material-icons">grass</span>
+                                <div class="crop-info">
+                                    <strong>Wheat</strong>
+                                    <span>High yield potential</span>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="material-icons">grass</span>
+                                <div class="crop-info">
+                                    <strong>Corn</strong>
+                                    <span>Medium yield potential</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/gis-analytics.js"></script>
+</body>
+</html> 

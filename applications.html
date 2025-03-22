@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - Agricultural Credit System</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/improved-styles.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="img/logo.svg" alt="AgriFinance Logo">
+                    <span class="logo-text">AgriFinance</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <span class="material-icons">menu</span>
+                </button>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">RS</div>
+                <div class="user-details">
+                    <h3>Rajesh Sharma</h3>
+                    <p>Rural Bank Officer</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html">
+                        <span class="material-icons">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="evaluate-farmer.html">
+                        <span class="material-icons">assessment</span>
+                        <span>Evaluate Farmer</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="applications.html">
+                        <span class="material-icons">description</span>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <span class="material-icons">insights</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <a href="#" class="logout">
+                    <span class="material-icons">exit_to_app</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="search-container">
+                    <span class="material-icons">search</span>
+                    <input type="text" placeholder="Search applications..." id="applicationSearch">
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="weather-widget" data-tooltip="Local weather conditions">
+                        <span class="material-icons">wb_sunny</span>
+                        <span class="temperature">32°C</span>
+                    </div>
+                    
+                    <div class="notification-container">
+                        <button class="notification-bell" data-tooltip="Notifications">
+                            <span class="material-icons">notifications</span>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <span class="material-icons">description</span>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-title">New Application</p>
+                                        <p class="notification-text">Sanjay Patel has submitted a new loan application</p>
+                                        <p class="notification-time">20 mins ago</p>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <span class="material-icons">check_circle</span>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-title">Application Approved</p>
+                                        <p class="notification-text">Mohan Gupta's loan has been approved</p>
+                                        <p class="notification-time">1 hour ago</p>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">
+                                        <span class="material-icons">loop</span>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-title">Application Updated</p>
+                                        <p class="notification-text">Geeta Devi's application has been updated</p>
+                                        <p class="notification-time">Yesterday</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="user-dropdown-container">
+                        <button class="user-dropdown-toggle">
+                            <div class="avatar">RS</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Loan Applications</h1>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" id="newApplicationBtn">
+                            <span class="material-icons">add</span>
+                            New Application
+                        </button>
+                        <button class="btn btn-secondary" id="exportBtn" data-tooltip="Export to CSV">
+                            <span class="material-icons">download</span>
+                            Export
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter and Sort Controls -->
+                <div class="filter-section card">
+                    <div class="filter-header">
+                        <h3>Filters</h3>
+                        <button class="btn btn-secondary btn-sm" id="clearFilters">Clear All</button>
+                    </div>
+                    <div class="filter-body">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label>Status</label>
+                                <select id="statusFilter">
+                                    <option value="">All Statuses</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="disbursed">Disbursed</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Date Range</label>
+                                <div class="date-range">
+                                    <input type="date" id="startDate" placeholder="Start date">
+                                    <span>to</span>
+                                    <input type="date" id="endDate" placeholder="End date">
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label>Amount Range</label>
+                                <div class="amount-range">
+                                    <input type="number" id="minAmount" placeholder="Min Amount">
+                                    <span>to</span>
+                                    <input type="number" id="maxAmount" placeholder="Max Amount">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Applications Table -->
+                <div class="applications-container">
+                    <div class="table-toolbar">
+                        <div class="table-info">
+                            <span>Showing <strong>10</strong> of <strong>35</strong> applications</span>
+                        </div>
+                        <div class="table-actions">
+                            <div class="sort-dropdown">
+                                <label for="sortBy">Sort by:</label>
+                                <select id="sortBy">
+                                    <option value="date-desc">Date (Newest first)</option>
+                                    <option value="date-asc">Date (Oldest first)</option>
+                                    <option value="amount-desc">Amount (High to Low)</option>
+                                    <option value="amount-asc">Amount (Low to High)</option>
+                                    <option value="name-asc">Name (A-Z)</option>
+                                    <option value="name-desc">Name (Z-A)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="applicationsTable">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>Application ID</th>
+                                    <th>Farmer Name</th>
+                                    <th>Loan Amount</th>
+                                    <th>Purpose</th>
+                                    <th>Applied Date</th>
+                                    <th>Status</th>
+                                    <th>Credit Score</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="application-checkbox"></td>
+                                    <td>APP-202308-001</td>
+                                    <td>Ramesh Kumar</td>
+                                    <td>₹1,50,000</td>
+                                    <td>Crop Loan</td>
+                                    <td>Aug 15, 2023</td>
+                                    <td><span class="status-badge approved">Approved</span></td>
+                                    <td>720</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn" data-tooltip="View details">
+                                                <span class="material-icons">visibility</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Edit application">
+                                                <span class="material-icons">edit</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Delete application">
+                                                <span class="material-icons">delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="application-checkbox"></td>
+                                    <td>APP-202308-002</td>
+                                    <td>Sanjay Patel</td>
+                                    <td>₹2,00,000</td>
+                                    <td>Equipment Purchase</td>
+                                    <td>Aug 14, 2023</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>685</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn" data-tooltip="View details">
+                                                <span class="material-icons">visibility</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Edit application">
+                                                <span class="material-icons">edit</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Delete application">
+                                                <span class="material-icons">delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="application-checkbox"></td>
+                                    <td>APP-202308-003</td>
+                                    <td>Geeta Devi</td>
+                                    <td>₹75,000</td>
+                                    <td>Seed Purchase</td>
+                                    <td>Aug 10, 2023</td>
+                                    <td><span class="status-badge disbursed">Disbursed</span></td>
+                                    <td>740</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn" data-tooltip="View details">
+                                                <span class="material-icons">visibility</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Edit application">
+                                                <span class="material-icons">edit</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Delete application">
+                                                <span class="material-icons">delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="application-checkbox"></td>
+                                    <td>APP-202308-004</td>
+                                    <td>Mohan Gupta</td>
+                                    <td>₹3,00,000</td>
+                                    <td>Land Development</td>
+                                    <td>Aug 8, 2023</td>
+                                    <td><span class="status-badge rejected">Rejected</span></td>
+                                    <td>580</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn" data-tooltip="View details">
+                                                <span class="material-icons">visibility</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Edit application">
+                                                <span class="material-icons">edit</span>
+                                            </button>
+                                            <button class="action-btn" data-tooltip="Delete application">
+                                                <span class="material-icons">delete</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-pagination">
+                        <div class="pagination-info">
+                            <span>Showing 1-10 of 35 applications</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" disabled>
+                                <span class="material-icons">chevron_left</span>
+                            </button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <button class="pagination-btn">4</button>
+                            <button class="pagination-btn">
+                                <span class="material-icons">chevron_right</span>
+                            </button>
+                        </div>
+                        <div class="pagination-options">
+                            <label for="rowsPerPage">Rows per page:</label>
+                            <select id="rowsPerPage">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/common.js"></script>
+    <script src="js/applications.js"></script>
+</body>
+</html>

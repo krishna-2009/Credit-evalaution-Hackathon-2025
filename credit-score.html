@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCredit - Get Your Credit Score</title>
+    <link rel="stylesheet" href="css/credit-score.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h1>FarmCredit</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="credit-score-container">
+            <div class="left-section">
+                <h2>Get Your Farm Credit Score</h2>
+                <p>Our alternative credit evaluation considers multiple factors unique to farming, helping you access fair and tailored credit options.</p>
+                <div class="progress-container">
+                    <div class="progress-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Farm Details</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Location & Climate</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Crops & Yield</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="benefits">
+                    <div class="benefit">
+                        <span class="material-icons">check_circle</span>
+                        <p>Fair evaluation based on farm potential</p>
+                    </div>
+                    <div class="benefit">
+                        <span class="material-icons">check_circle</span>
+                        <p>Access to tailored loan options</p>
+                    </div>
+                    <div class="benefit">
+                        <span class="material-icons">check_circle</span>
+                        <p>Instant results with detailed breakdown</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-section">
+                <form id="creditScoreForm">
+                    <!-- Step 1: Farm Details -->
+                    <div class="form-step active" data-step="1">
+                        <h3>Farm Details</h3>
+                        <div class="form-group">
+                            <label for="farmerName">Farmer Name</label>
+                            <input type="text" id="farmerName" name="farmerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="farmSize">Farm Size (in acres)</label>
+                            <input type="number" id="farmSize" name="farmSize" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="farmAge">Years in Farming</label>
+                            <input type="number" id="farmAge" name="farmAge" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ownershipStatus">Land Ownership Status</label>
+                            <select id="ownershipStatus" name="ownershipStatus" required>
+                                <option value="">Select an option</option>
+                                <option value="owned">Owned</option>
+                                <option value="leased">Leased</option>
+                                <option value="partial">Partially Owned</option>
+                            </select>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="next-btn">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Location & Climate -->
+                    <div class="form-step" data-step="2">
+                        <h3>Location & Climate</h3>
+                        <div class="form-group">
+                            <label for="location">Farm Location</label>
+                            <input type="text" id="location" name="location" placeholder="Enter your address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="soilType">Primary Soil Type</label>
+                            <select id="soilType" name="soilType" required>
+                                <option value="">Select soil type</option>
+                                <option value="loam">Loam</option>
+                                <option value="clay">Clay</option>
+                                <option value="sandy">Sandy</option>
+                                <option value="silt">Silty</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="waterSource">Primary Water Source</label>
+                            <select id="waterSource" name="waterSource" required>
+                                <option value="">Select water source</option>
+                                <option value="well">Well</option>
+                                <option value="river">River/Stream</option>
+                                <option value="rain">Rainwater</option>
+                                <option value="irrigation">Irrigation System</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Climate Challenges (Select all that apply)</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="climateIssues" value="drought"> Drought</label>
+                                <label><input type="checkbox" name="climateIssues" value="flood"> Flooding</label>
+                                <label><input type="checkbox" name="climateIssues" value="frost"> Frost</label>
+                                <label><input type="checkbox" name="climateIssues" value="heatwave"> Heat Waves</label>
+                            </div>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="button" class="next-btn">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Crops & Yield -->
+                    <div class="form-step" data-step="3">
+                        <h3>Crops & Yield</h3>
+                        <div class="form-group">
+                            <label for="primaryCrop">Primary Crop</label>
+                            <select id="primaryCrop" name="primaryCrop" required>
+                                <option value="">Select primary crop</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="rice">Rice</option>
+                                <option value="corn">Corn</option>
+                                <option value="soybean">Soybean</option>
+                                <option value="cotton">Cotton</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastYieldAmount">Last Year's Yield (tons)</label>
+                            <input type="number" id="lastYieldAmount" name="lastYieldAmount" min="0" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="techniquesUsed">Farming Techniques (Select all that apply)</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="techniques" value="organic"> Organic</label>
+                                <label><input type="checkbox" name="techniques" value="conventional"> Conventional</label>
+                                <label><input type="checkbox" name="techniques" value="noTill"> No-Till</label>
+                                <label><input type="checkbox" name="techniques" value="precision"> Precision Farming</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="equipmentOwned">Equipment Ownership</label>
+                            <select id="equipmentOwned" name="equipmentOwned" required>
+                                <option value="">Select an option</option>
+                                <option value="owned">Own All Equipment</option>
+                                <option value="partial">Own Some Equipment</option>
+                                <option value="rented">Rent Equipment</option>
+                                <option value="none">No Modern Equipment</option>
+                            </select>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="submit" class="submit-btn">Get Credit Score</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credit Score Result Modal (Hidden by default) -->
+    <div class="modal" id="scoreModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="score-result">
+                <h2>Your Farm Credit Score</h2>
+                <div class="score-circle">
+                    <div class="score-number">780</div>
+                </div>
+                <div class="score-label">Excellent</div>
+                <p class="score-description">Based on your farm data, you have excellent creditworthiness!</p>
+                
+                <div class="score-factors">
+                    <h3>Key Factors</h3>
+                    <div class="factor">
+                        <div class="factor-name">Location Quality</div>
+                        <div class="factor-bar">
+                            <div class="factor-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="factor-value">85%</div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-name">Soil Health</div>
+                        <div class="factor-bar">
+                            <div class="factor-fill" style="width: 92%"></div>
+                        </div>
+                        <div class="factor-value">92%</div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-name">Water Availability</div>
+                        <div class="factor-bar">
+                            <div class="factor-fill" style="width: 78%"></div>
+                        </div>
+                        <div class="factor-value">78%</div>
+                    </div>
+                    <div class="factor">
+                        <div class="factor-name">Climate Resilience</div>
+                        <div class="factor-bar">
+                            <div class="factor-fill" style="width: 70%"></div>
+                        </div>
+                        <div class="factor-value">70%</div>
+                    </div>
+                </div>
+                
+                <div class="score-recommendations">
+                    <h3>Loan Recommendations</h3>
+                    <div class="loan-options">
+                        <div class="loan-option">
+                            <h4>Crop Development Loan</h4>
+                            <p>Up to $50,000 with 4.5% interest rate</p>
+                        </div>
+                        <div class="loan-option">
+                            <h4>Equipment Financing</h4>
+                            <p>Up to $75,000 with 5.2% interest rate</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="score-actions">
+                    <a href="login.html" class="btn login-btn">Create Account</a>
+                    <button class="btn download-btn">Download Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/credit-score.js"></script>
+</body>
+</html> 

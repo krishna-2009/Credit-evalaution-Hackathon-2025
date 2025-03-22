@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmCredit - Evaluate Farmer</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/evaluate-farmer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>FarmCredit</h2>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">JD</div>
+                <div class="user-details">
+                    <h3>John Doe</h3>
+                    <p>Senior Loan Officer</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html">
+                        <span class="material-icons">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="evaluate-farmer.html">
+                        <span class="material-icons">assessment</span>
+                        <span>Evaluate Farmer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="applications.html">
+                        <span class="material-icons">description</span>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <span class="material-icons">insights</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="settings.html">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="logout">
+                <a href="index.html">
+                    <span class="material-icons">logout</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <h1>Farmer Credit Evaluation</h1>
+                    <p>Evaluate farmers using alternative data sources for more accurate credit assessment.</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <span class="material-icons">search</span>
+                        <input type="text" placeholder="Search farmers...">
+                    </div>
+                    <div class="notification" data-tooltip="Notifications">
+                        <span class="material-icons">notifications</span>
+                        <span class="badge">2</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Evaluation Form -->
+            <div class="evaluation-container">
+                <div class="evaluation-progress">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Basic Information</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Farm Details</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Financial History</div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Additional Factors</div>
+                    </div>
+                    <div class="progress-step" data-step="5">
+                        <div class="step-number">5</div>
+                        <div class="step-label">Review & Submit</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-indicator" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <div class="evaluation-form">
+                    <!-- Step 1: Basic Information -->
+                    <div class="form-step active" data-step="1">
+                        <h2>Basic Information</h2>
+                        <p class="form-description">Enter the farmer's personal information and contact details.</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="18" max="120">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobileNumber">Mobile Number</label>
+                                <input type="tel" id="mobileNumber" name="mobileNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="aadharNumber">Aadhar Number</label>
+                                <input type="text" id="aadharNumber" name="aadharNumber" maxlength="12">
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="address">Address</label>
+                                <textarea id="address" name="address" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" name="state">
+                                    <option value="">Select State</option>
+                                    <option value="andhra-pradesh">Andhra Pradesh</option>
+                                    <option value="karnataka">Karnataka</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                    <option value="tamil-nadu">Tamil Nadu</option>
+                                    <option value="punjab">Punjab</option>
+                                    <option value="gujarat">Gujarat</option>
+                                    <!-- More states would be added here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <input type="text" id="district" name="district">
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="next-btn">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Farm Details -->
+                    <div class="form-step" data-step="2">
+                        <h2>Farm Details</h2>
+                        <p class="form-description">Enter information about the farm land, crops, and farming methods.</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="farmSize">Land Size (acres)</label>
+                                <input type="number" id="farmSize" name="farmSize" min="0" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label for="landOwnership">Land Ownership</label>
+                                <select id="landOwnership" name="landOwnership">
+                                    <option value="">Select Ownership Type</option>
+                                    <option value="owned">Owned</option>
+                                    <option value="leased">Leased</option>
+                                    <option value="shared">Shared</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="irrigationSource">Irrigation Source</label>
+                                <select id="irrigationSource" name="irrigationSource">
+                                    <option value="">Select Source</option>
+                                    <option value="well">Well</option>
+                                    <option value="canal">Canal</option>
+                                    <option value="river">River</option>
+                                    <option value="rainwater">Rainwater</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="irrigationCoverage">Irrigation Coverage (%)</label>
+                                <input type="number" id="irrigationCoverage" name="irrigationCoverage" min="0" max="100">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Primary Crops</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="rice"> Rice
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="wheat"> Wheat
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="cotton"> Cotton
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="sugarcane"> Sugarcane
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="pulses"> Pulses
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="vegetables"> Vegetables
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="crops" value="fruits"> Fruits
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="farmingMethod">Farming Method</label>
+                                <select id="farmingMethod" name="farmingMethod">
+                                    <option value="">Select Method</option>
+                                    <option value="traditional">Traditional</option>
+                                    <option value="organic">Organic</option>
+                                    <option value="modern">Modern/Technology-enabled</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fertilizersUsed">Fertilizers Used</label>
+                                <select id="fertilizersUsed" name="fertilizersUsed">
+                                    <option value="">Select Type</option>
+                                    <option value="chemical">Chemical</option>
+                                    <option value="organic">Organic</option>
+                                    <option value="mixed">Mixed</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="button" class="next-btn">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Placeholder for additional steps -->
+                    <div class="form-step" data-step="3">
+                        <h2>Financial History</h2>
+                        <p class="form-description">This section will contain fields for financial details.</p>
+                        <div class="placeholder-content">
+                            <div class="placeholder-image">
+                                <span class="material-icons">account_balance</span>
+                            </div>
+                            <p>This section would include fields for:</p>
+                            <ul>
+                                <li>Previous loan history</li>
+                                <li>Annual income from farming</li>
+                                <li>Additional income sources</li>
+                                <li>Current debts and liabilities</li>
+                                <li>Banking relationships</li>
+                                <li>Payment histories</li>
+                            </ul>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="button" class="next-btn">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="4">
+                        <h2>Additional Factors</h2>
+                        <p class="form-description">This section will collect alternative data for credit evaluation.</p>
+                        <div class="placeholder-content">
+                            <div class="placeholder-image">
+                                <span class="material-icons">insights</span>
+                            </div>
+                            <p>This section would include fields for:</p>
+                            <ul>
+                                <li>Historical crop yields</li>
+                                <li>Technology adoption in farming</li>
+                                <li>Sustainable farming practices</li>
+                                <li>Local market access</li>
+                                <li>Community standing</li>
+                                <li>Mobile phone usage patterns</li>
+                                <li>Weather resilience measures</li>
+                            </ul>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="button" class="next-btn">Next Step</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" data-step="5">
+                        <h2>Review & Submit</h2>
+                        <p class="form-description">Review all the information before submitting for evaluation.</p>
+                        <div class="placeholder-content">
+                            <div class="placeholder-image">
+                                <span class="material-icons">fact_check</span>
+                            </div>
+                            <p>This section would display a summary of all information entered along with:</p>
+                            <ul>
+                                <li>Preliminary risk assessment</li>
+                                <li>Estimated credit score range</li>
+                                <li>Recommended loan products</li>
+                                <li>Suggested loan terms</li>
+                            </ul>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" class="prev-btn">Previous</button>
+                            <button type="button" class="submit-btn">Evaluate Credit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/evaluate-farmer.js"></script>
+</body>
+</html> 

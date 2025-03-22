@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Agricultural Credit System</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/improved-styles.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="img/logo.svg" alt="AgriFinance Logo">
+                    <span class="logo-text">AgriFinance</span>
+                </div>
+                <button class="sidebar-toggle">
+                    <span class="material-icons">menu</span>
+                </button>
+            </div>
+            
+            <div class="user-info">
+                <div class="avatar">RS</div>
+                <div class="user-details">
+                    <h3>Rajesh Sharma</h3>
+                    <p>Rural Bank Officer</p>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html">
+                        <span class="material-icons">dashboard</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="evaluate-farmer.html">
+                        <span class="material-icons">assessment</span>
+                        <span>Evaluate Farmer</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="applications.html">
+                        <span class="material-icons">description</span>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <span class="material-icons">insights</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="settings.html">
+                        <span class="material-icons">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <a href="#" class="logout">
+                    <span class="material-icons">exit_to_app</span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="search-container">
+                    <span class="material-icons">search</span>
+                    <input type="text" placeholder="Search..." id="searchInput">
+                </div>
+                
+                <div class="top-bar-right">
+                    <div class="weather-widget" data-tooltip="Local weather conditions">
+                        <span class="material-icons">wb_sunny</span>
+                        <span class="temperature">32°C</span>
+                    </div>
+                    
+                    <div class="notification-container">
+                        <button class="notification-bell" data-tooltip="Notifications">
+                            <span class="material-icons">notifications</span>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <span class="material-icons">settings</span>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-title">System Update</p>
+                                        <p class="notification-text">New credit scoring model has been implemented</p>
+                                        <p class="notification-time">3 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">
+                                        <span class="material-icons">security</span>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-title">Security Alert</p>
+                                        <p class="notification-text">Please update your password</p>
+                                        <p class="notification-time">Yesterday</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="user-dropdown-container">
+                        <button class="user-dropdown-toggle">
+                            <div class="avatar">RS</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                    <p>Manage your account and application preferences</p>
+                </div>
+                
+                <!-- Settings Navigation -->
+                <div class="settings-navigation">
+                    <div class="settings-nav-item active" data-target="account-settings">
+                        <span class="material-icons">person</span>
+                        <span>Account</span>
+                    </div>
+                    <div class="settings-nav-item" data-target="security-settings">
+                        <span class="material-icons">security</span>
+                        <span>Security</span>
+                    </div>
+                    <div class="settings-nav-item" data-target="notification-settings">
+                        <span class="material-icons">notifications</span>
+                        <span>Notifications</span>
+                    </div>
+                    <div class="settings-nav-item" data-target="application-settings">
+                        <span class="material-icons">tune</span>
+                        <span>Application</span>
+                    </div>
+                    <div class="settings-nav-item" data-target="support-settings">
+                        <span class="material-icons">help</span>
+                        <span>Support</span>
+                    </div>
+                </div>
+                
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Account Settings -->
+                    <div class="settings-section active" id="account-settings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Profile Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="profileForm">
+                                    <div class="profile-info">
+                                        <div class="profile-avatar">
+                                            <div class="avatar large">RS</div>
+                                            <button type="button" class="btn btn-secondary btn-sm">
+                                                <span class="material-icons">photo_camera</span>
+                                                Change Photo
+                                            </button>
+                                        </div>
+                                        <div class="profile-details">
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="fullName">Full Name</label>
+                                                    <input type="text" id="fullName" value="Rajesh Sharma" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="employeeId">Employee ID</label>
+                                                    <input type="text" id="employeeId" value="RBO-2023-4578" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="email">Email Address</label>
+                                                    <input type="email" id="email" value="rajesh.sharma@ruralbank.in" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phone">Phone Number</label>
+                                                    <input type="tel" id="phone" value="+91 9876543210" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="designation">Designation</label>
+                                                    <input type="text" id="designation" value="Rural Bank Officer" class="form-control" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="branch">Branch</label>
+                                                    <input type="text" id="branch" value="Ahmedabad Rural" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-buttons">
+                                        <button type="button" class="btn btn-primary" id="saveProfileBtn">
+                                            <span class="material-icons">save</span>
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Regional Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="regionalSettingsForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="language">Language</label>
+                                            <select id="language" class="form-control">
+                                                <option value="en" selected>English</option>
+                                                <option value="hi">Hindi</option>
+                                                <option value="gu">Gujarati</option>
+                                                <option value="mr">Marathi</option>
+                                                <option value="pa">Punjabi</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="timeZone">Time Zone</label>
+                                            <select id="timeZone" class="form-control">
+                                                <option value="IST" selected>Indian Standard Time (IST)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="dateFormat">Date Format</label>
+                                            <select id="dateFormat" class="form-control">
+                                                <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
+                                                <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                                <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="currency">Currency</label>
+                                            <select id="currency" class="form-control">
+                                                <option value="INR" selected>Indian Rupee (₹)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-buttons">
+                                        <button type="button" class="btn btn-primary" id="saveRegionalBtn">
+                                            <span class="material-icons">save</span>
+                                            Save Changes
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Settings -->
+                    <div class="settings-section" id="security-settings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Change Password</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="passwordForm">
+                                    <div class="form-group">
+                                        <label for="currentPassword">Current Password</label>
+                                        <input type="password" id="currentPassword" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newPassword">New Password</label>
+                                        <input type="password" id="newPassword" class="form-control">
+                                        <span class="help-text">Use 8+ characters with a mix of letters, numbers & symbols</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="confirmPassword">Confirm New Password</label>
+                                        <input type="password" id="confirmPassword" class="form-control">
+                                    </div>
+                                    <div class="form-buttons">
+                                        <button type="button" class="btn btn-primary" id="savePasswordBtn">
+                                            <span class="material-icons">lock</span>
+                                            Update Password
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Two-Factor Authentication</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>SMS Authentication</h4>
+                                        <p>Receive a verification code via SMS when logging in</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Email Authentication</h4>
+                                        <p>Receive a verification code via email when logging in</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Authenticator App</h4>
+                                        <p>Use an authenticator app to generate verification codes</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <button class="btn btn-secondary btn-sm">Set Up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Login History</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Date & Time</th>
+                                                <th>IP Address</th>
+                                                <th>Device</th>
+                                                <th>Location</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Aug 21, 2023 09:15 AM</td>
+                                                <td>192.168.1.45</td>
+                                                <td>Windows 10 - Chrome</td>
+                                                <td>Ahmedabad, Gujarat</td>
+                                                <td><span class="status-badge approved">Success</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aug 20, 2023 05:30 PM</td>
+                                                <td>192.168.1.45</td>
+                                                <td>Windows 10 - Chrome</td>
+                                                <td>Ahmedabad, Gujarat</td>
+                                                <td><span class="status-badge approved">Success</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aug 19, 2023 02:45 PM</td>
+                                                <td>192.168.1.100</td>
+                                                <td>Android - Chrome Mobile</td>
+                                                <td>Ahmedabad, Gujarat</td>
+                                                <td><span class="status-badge pending">Verification Required</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aug 18, 2023 10:20 AM</td>
+                                                <td>192.168.1.45</td>
+                                                <td>Windows 10 - Chrome</td>
+                                                <td>Ahmedabad, Gujarat</td>
+                                                <td><span class="status-badge approved">Success</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Settings -->
+                    <div class="settings-section" id="notification-settings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Notification Preferences</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-category">
+                                    <h4>Application Notifications</h4>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>New Applications</h5>
+                                            <p>Get notified when a new loan application is submitted</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Application Updates</h5>
+                                            <p>Get notified when an application status changes</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Pending Approvals</h5>
+                                            <p>Get reminded about applications awaiting your approval</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-category">
+                                    <h4>System Notifications</h4>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>System Updates</h5>
+                                            <p>Get notified about system updates and maintenance</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Security Alerts</h5>
+                                            <p>Get notified about security-related events</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Performance Reports</h5>
+                                            <p>Get periodic reports about your performance</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="setting-category">
+                                    <h4>Notification Delivery</h4>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Email Notifications</h5>
+                                            <p>Receive notifications via email</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>SMS Notifications</h5>
+                                            <p>Receive notifications via SMS</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="setting-row">
+                                        <div class="setting-info">
+                                            <h5>Browser Notifications</h5>
+                                            <p>Receive notifications in your browser</p>
+                                        </div>
+                                        <div class="setting-action">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-buttons">
+                                    <button type="button" class="btn btn-primary" id="saveNotificationBtn">
+                                        <span class="material-icons">save</span>
+                                        Save Preferences
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Application Settings -->
+                    <div class="settings-section" id="application-settings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Credit Scoring Model</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Scoring Model Version</h4>
+                                        <p>Select which version of the credit scoring model to use</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <select class="form-control">
+                                            <option value="3.2" selected>Version 3.2 (Current)</option>
+                                            <option value="3.1">Version 3.1 (Legacy)</option>
+                                            <option value="3.0">Version 3.0 (Legacy)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Risk Threshold</h4>
+                                        <p>Set the risk threshold for automatic approvals</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <select class="form-control">
+                                            <option value="conservative">Conservative (700+)</option>
+                                            <option value="balanced" selected>Balanced (650+)</option>
+                                            <option value="aggressive">Aggressive (600+)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Display Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Theme</h4>
+                                        <p>Choose your preferred theme</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <select class="form-control">
+                                            <option value="light" selected>Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="system">System Default</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Compact Mode</h4>
+                                        <p>Display more information with less space</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="setting-row">
+                                    <div class="setting-info">
+                                        <h4>Default Landing Page</h4>
+                                        <p>Choose which page to see first when you log in</p>
+                                    </div>
+                                    <div class="setting-action">
+                                        <select class="form-control">
+                                            <option value="dashboard" selected>Dashboard</option>
+                                            <option value="applications">Applications</option>
+                                            <option value="evaluate">Evaluate Farmer</option>
+                                            <option value="analytics">Analytics</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="btn btn-primary" id="saveAppSettingsBtn">
+                                <span class="material-icons">save</span>
+                                Save Settings
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="resetAppSettingsBtn">
+                                <span class="material-icons">restart_alt</span>
+                                Reset to Defaults
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Support Settings -->
+                    <div class="settings-section" id="support-settings">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Help & Support</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="support-options">
+                                    <div class="support-option">
+                                        <div class="support-icon">
+                                            <span class="material-icons">help_outline</span>
+                                        </div>
+                                        <div class="support-content">
+                                            <h4>Knowledge Base</h4>
+                                            <p>Find answers to common questions</p>
+                                            <a href="#" class="btn btn-secondary btn-sm">Browse Articles</a>
+                                        </div>
+                                    </div>
+                                    <div class="support-option">
+                                        <div class="support-icon">
+                                            <span class="material-icons">video_library</span>
+                                        </div>
+                                        <div class="support-content">
+                                            <h4>Video Tutorials</h4>
+                                            <p>Learn how to use the system with guided videos</p>
+                                            <a href="#" class="btn btn-secondary btn-sm">Watch Tutorials</a>
+                                        </div>
+                                    </div>
+                                    <div class="support-option">
+                                        <div class="support-icon">
+                                            <span class="material-icons">contact_support</span>
+                                        </div>
+                                        <div class="support-content">
+                                            <h4>Contact Support</h4>
+                                            <p>Get help from our support team</p>
+                                            <a href="#" class="btn btn-secondary btn-sm">Contact Us</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Report an Issue</h3>
+                            </div>
+                            <div class="card-body">
+                                <form id="issueForm">
+                                    <div class="form-group">
+                                        <label for="issueType">Issue Type</label>
+                                        <select id="issueType" class="form-control">
+                                            <option value="">Select an issue type</option>
+                                            <option value="bug">Bug Report</option>
+                                            <option value="feature">Feature Request</option>
+                                            <option value="account">Account Problem</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="issueTitle">Issue Title</label>
+                                        <input type="text" id="issueTitle" class="form-control" placeholder="Brief description of the issue">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="issueDescription">Description</label>
+                                        <textarea id="issueDescription" class="form-control" rows="5" placeholder="Please provide details about the issue, including steps to reproduce if applicable"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="issueAttachment">Attachments (Optional)</label>
+                                        <input type="file" id="issueAttachment" class="form-control">
+                                        <span class="help-text">You can attach screenshots or other files to help us understand the issue (max 5MB)</span>
+                                    </div>
+                                    <div class="form-buttons">
+                                        <button type="button" class="btn btn-primary" id="submitIssueBtn">
+                                            <span class="material-icons">send</span>
+                                            Submit Issue
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>System Information</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="system-info">
+                                    <div class="info-row">
+                                        <div class="info-label">System Version</div>
+                                        <div class="info-value">AgriFinance v3.2.5</div>
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-label">Last Updated</div>
+                                        <div class="info-value">August 15, 2023</div>
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-label">Browser</div>
+                                        <div class="info-value">Chrome 116.0.5845.96</div>
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-label">Operating System</div>
+                                        <div class="info-value">Windows 10</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/common.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html> 
