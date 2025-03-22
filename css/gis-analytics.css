@@ -1,0 +1,102 @@
+.gis-container {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    height: calc(100vh - var(--header-height) - 40px);
+}
+
+.map-container {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#mapLayer {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+.analytics-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.analysis-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.analysis-item:last-child {
+    border-bottom: none;
+}
+
+.crop-list {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.crop-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.crop-list li:last-child {
+    border-bottom: none;
+}
+
+.crop-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.crop-info strong {
+    color: var(--dark-text);
+}
+
+.crop-info span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.material-icons {
+    color: var(--primary-green);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .gis-container {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 15px;
+    }
+
+    .analytics-sidebar .card {
+        min-width: 300px;
+    }
+} 
