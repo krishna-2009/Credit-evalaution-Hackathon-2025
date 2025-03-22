@@ -104,10 +104,6 @@
                     </div>
                     <div class="progress-step" data-step="4">
                         <div class="step-number">4</div>
-                        <div class="step-label">Additional Factors</div>
-                    </div>
-                    <div class="progress-step" data-step="5">
-                        <div class="step-number">5</div>
                         <div class="step-label">Review & Submit</div>
                     </div>
                     <div class="progress-bar">
@@ -266,57 +262,82 @@
                         </div>
                     </div>
                     
-                    <!-- Placeholder for additional steps -->
+                    <!-- Step 3: Financial History -->
                     <div class="form-step" data-step="3">
                         <h2>Financial History</h2>
-                        <p class="form-description">This section will contain fields for financial details.</p>
-                        <div class="placeholder-content">
-                            <div class="placeholder-image">
-                                <span class="material-icons">account_balance</span>
+                        <p class="form-description">Enter the farmer's financial information and credit history.</p>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="previousLoans">Previous Loan History</label>
+                                <select id="previousLoans" name="previousLoans" required>
+                                    <option value="">Select Loan History</option>
+                                    <option value="no-loans">No Previous Loans</option>
+                                    <option value="active-loans">Currently Active Loans</option>
+                                    <option value="completed-loans">Successfully Completed Loans</option>
+                                    <option value="defaulted">Has Defaulted Loans</option>
+                                </select>
                             </div>
-                            <p>This section would include fields for:</p>
-                            <ul>
-                                <li>Previous loan history</li>
-                                <li>Annual income from farming</li>
-                                <li>Additional income sources</li>
-                                <li>Current debts and liabilities</li>
-                                <li>Banking relationships</li>
-                                <li>Payment histories</li>
-                            </ul>
+                            <div class="form-group">
+                                <label for="annualIncome">Annual Income from Farming (₹)</label>
+                                <input type="number" id="annualIncome" name="annualIncome" min="0" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Additional Income Sources</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additionalIncome" value="dairy"> Dairy Farming
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additionalIncome" value="poultry"> Poultry
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additionalIncome" value="business"> Small Business
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additionalIncome" value="labor"> Labor Work
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="additionalIncome" value="rental"> Land/Property Rental
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="currentDebts">Current Debts and Liabilities (₹)</label>
+                                <input type="number" id="currentDebts" name="currentDebts" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bankingRelationship">Banking Relationships</label>
+                                <select id="bankingRelationship" name="bankingRelationship" required>
+                                    <option value="">Select Relationship Status</option>
+                                    <option value="savings">Savings Account Only</option>
+                                    <option value="current">Current Account</option>
+                                    <option value="both">Both Savings and Current</option>
+                                    <option value="none">No Banking Relationship</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentHistory">Payment History</label>
+                                <select id="paymentHistory" name="paymentHistory" required>
+                                    <option value="">Select Payment History</option>
+                                    <option value="excellent">Excellent - Always On Time</option>
+                                    <option value="good">Good - Mostly On Time</option>
+                                    <option value="fair">Fair - Occasional Delays</option>
+                                    <option value="poor">Poor - Frequent Delays</option>
+                                </select>
+                            </div>
                         </div>
+                        
                         <div class="form-buttons">
                             <button type="button" class="prev-btn">Previous</button>
                             <button type="button" class="next-btn">Next Step</button>
                         </div>
                     </div>
-                    
+
+                    <!-- Step 4: Review & Submit -->
                     <div class="form-step" data-step="4">
-                        <h2>Additional Factors</h2>
-                        <p class="form-description">This section will collect alternative data for credit evaluation.</p>
-                        <div class="placeholder-content">
-                            <div class="placeholder-image">
-                                <span class="material-icons">insights</span>
-                            </div>
-                            <p>This section would include fields for:</p>
-                            <ul>
-                                <li>Historical crop yields</li>
-                                <li>Technology adoption in farming</li>
-                                <li>Sustainable farming practices</li>
-                                <li>Local market access</li>
-                                <li>Community standing</li>
-                                <li>Mobile phone usage patterns</li>
-                                <li>Weather resilience measures</li>
-                            </ul>
-                        </div>
-                        <div class="form-buttons">
-                            <button type="button" class="prev-btn">Previous</button>
-                            <button type="button" class="next-btn">Next Step</button>
-                        </div>
-                    </div>
-                    
-                    <div class="form-step" data-step="5">
                         <h2>Review & Submit</h2>
-                        <p class="form-description">Review all the information before submitting for evaluation.</p>
+                        <p class="form-description">Review all information before submitting for credit evaluation.</p>
                         <div class="placeholder-content">
                             <div class="placeholder-image">
                                 <span class="material-icons">fact_check</span>
