@@ -1,0 +1,326 @@
+/* Add or update CSS variables for theme colors */
+:root {
+  --primary: #4CAF50;
+  --primary-dark: #388E3C;
+  --primary-light: #C8E6C9;
+  --primary-text: #212121;
+  --secondary-text: #757575;
+  --bg-color: #F5F7FA;
+  --card-bg: #FFFFFF;
+  --border-color: #EAEAEA;
+  --gray-100: #F8F9FA;
+  --gray-200: #EAEAEA;
+  --gray-300: #DEE2E6;
+  --gray-400: #CED4DA;
+  --gray-500: #ADB5BD;
+  --gray-600: #6C757D;
+  --gray-700: #495057;
+  --gray-800: #343A40;
+  --gray-900: #212529;
+  --text-color: var(--primary-text);
+  --chart-grid: rgba(0, 0, 0, 0.1);
+  --text-muted: var(--gray-600);
+  --divider: var(--gray-200);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode theme variables */
+[data-theme="dark"] {
+  --primary-text: #E1E1E1;
+  --secondary-text: #B0B0B0;
+  --bg-color: #121212;
+  --card-bg: #1E1E1E;
+  --border-color: #333333;
+  --gray-100: #1E1E1E;
+  --gray-200: #333333;
+  --gray-300: #444444;
+  --gray-400: #555555;
+  --gray-500: #666666;
+  --gray-600: #999999;
+  --gray-700: #AAAAAA;
+  --gray-800: #CCCCCC;
+  --gray-900: #E1E1E1;
+  --text-color: var(--primary-text);
+  --chart-grid: rgba(255, 255, 255, 0.1);
+  --text-muted: var(--gray-600);
+  --divider: var(--gray-200);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme colors to elements */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card, .dropdown-menu, .modal-content, .offcanvas {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-color);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.border, .border-top, .border-bottom, .border-start, .border-end {
+  border-color: var(--border-color) !important;
+}
+
+hr {
+  border-color: var(--divider);
+}
+
+/* Header and navigation */
+.app-header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--text-color);
+}
+
+.sidebar {
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+}
+
+.nav-item .nav-link {
+  color: var(--text-color);
+}
+
+.nav-link.active {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--primary) !important;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+/* Input elements */
+.form-control, .form-select {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.input-group-text {
+  background-color: var(--gray-100);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+/* Tables */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-color);
+  --bs-table-border-color: var(--border-color);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: var(--gray-100);
+  color: var(--text-color);
+}
+
+.table-hover > tbody > tr:hover {
+  --bs-table-accent-bg: var(--gray-200);
+  color: var(--text-color);
+}
+
+/* Filter section in applications page */
+.filter-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-section .form-label {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.filter-section .form-control,
+.filter-section .form-select {
+  background-color: var(--bg-color);
+}
+
+/* Theme toggle specific styles */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 48px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: var(--gray-300);
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: white;
+  bottom: 4px;
+  content: "";
+  height: 16px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 16px;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Dashboard cards */
+.stat-card {
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
+
+/* Chart containers */
+.chart-container {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  height: 100%;
+  min-height: 300px;
+}
+
+.chart-container h5 {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+/* Profile section */
+.profile-header {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-light);
+}
+
+.profile-info {
+  padding-left: 2rem;
+}
+
+.profile-info h4 {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.profile-stats {
+  margin-top: 1rem;
+}
+
+.profile-stat-item {
+  text-align: center;
+  padding: 0.75rem;
+  background-color: var(--gray-100);
+  border-radius: 0.5rem;
+}
+
+.profile-stat-item h6 {
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.profile-stat-item p {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Settings page */
+.settings-section {
+  background-color: var(--card-bg);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.settings-section h5 {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Fix for dropdown menus in dark mode */
+.dropdown-menu {
+  background-color: var(--card-bg);
+}
+
+.dropdown-item {
+  color: var(--text-color);
+}
+
+.dropdown-item:hover {
+  background-color: var(--gray-100);
+}
+
+/* Fix for modals in dark mode */
+.modal-content {
+  background-color: var(--card-bg);
+}
+
+.modal-header, .modal-footer {
+  border-color: var(--border-color);
+}
+
+.modal-title {
+  color: var(--text-color);
+} 

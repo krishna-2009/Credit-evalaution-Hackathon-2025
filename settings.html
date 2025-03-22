@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings - Agricultural Credit System</title>
+    <title>Settings - FarmCredit</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/improved-styles.css">
     <link rel="stylesheet" href="css/toast.css">
@@ -14,21 +14,16 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-container">
-                    <img src="img/logo.svg" alt="AgriFinance Logo">
-                    <span class="logo-text">AgriFinance</span>
-                </div>
-                <button class="sidebar-toggle">
-                    <span class="material-icons">menu</span>
-                </button>
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>FarmCredit</h2>
             </div>
             
             <div class="user-info">
-                <div class="avatar">RS</div>
+                <div class="avatar">JD</div>
                 <div class="user-details">
-                    <h3>Rajesh Sharma</h3>
-                    <p>Rural Bank Officer</p>
+                    <h3>John Doe</h3>
+                    <p>Senior Loan Officer</p>
                 </div>
             </div>
             
@@ -65,9 +60,9 @@
                 </li>
             </ul>
             
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <span class="material-icons">exit_to_app</span>
+            <div class="logout">
+                <a href="index.html">
+                    <span class="material-icons">logout</span>
                     <span>Logout</span>
                 </a>
             </div>
@@ -75,71 +70,25 @@
         
         <!-- Main Content -->
         <div class="main-content">
-            <div class="top-bar">
-                <div class="search-container">
-                    <span class="material-icons">search</span>
-                    <input type="text" placeholder="Search..." id="searchInput">
-                </div>
-                
-                <div class="top-bar-right">
-                    <div class="weather-widget" data-tooltip="Local weather conditions">
-                        <span class="material-icons">wb_sunny</span>
-                        <span class="temperature">32°C</span>
-                    </div>
-                    
-                    <div class="notification-container">
-                        <button class="notification-bell" data-tooltip="Notifications">
-                            <span class="material-icons">notifications</span>
-                            <span class="notification-badge">3</span>
-                        </button>
-                        
-                        <div class="notification-dropdown">
-                            <div class="notification-header">
-                                <h3>Notifications</h3>
-                                <button class="mark-all-read">Mark all as read</button>
-                            </div>
-                            <div class="notification-list">
-                                <div class="notification-item unread">
-                                    <div class="notification-icon">
-                                        <span class="material-icons">settings</span>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p class="notification-title">System Update</p>
-                                        <p class="notification-text">New credit scoring model has been implemented</p>
-                                        <p class="notification-time">3 hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="notification-item">
-                                    <div class="notification-icon">
-                                        <span class="material-icons">security</span>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p class="notification-title">Security Alert</p>
-                                        <p class="notification-text">Please update your password</p>
-                                        <p class="notification-time">Yesterday</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="notification-footer">
-                                <a href="#">View all notifications</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="user-dropdown-container">
-                        <button class="user-dropdown-toggle">
-                            <div class="avatar">RS</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-wrapper">
-                <div class="page-header">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
                     <h1>Settings</h1>
                     <p>Manage your account and application preferences</p>
                 </div>
-                
+                <div class="header-right">
+                    <div class="search-bar">
+                        <span class="material-icons">search</span>
+                        <input type="text" placeholder="Search..." id="searchInput">
+                    </div>
+                    <div class="notification" data-tooltip="Notifications">
+                        <span class="material-icons">notifications</span>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content-wrapper">
                 <!-- Settings Navigation -->
                 <div class="settings-navigation">
                     <div class="settings-nav-item active" data-target="account-settings">
@@ -168,15 +117,15 @@
                 <div class="settings-content">
                     <!-- Account Settings -->
                     <div class="settings-section active" id="account-settings">
-                        <div class="card">
+                        <div class="grid-card">
                             <div class="card-header">
-                                <h3>Profile Information</h3>
+                                <h2>Profile Information</h2>
                             </div>
                             <div class="card-body">
                                 <form id="profileForm">
                                     <div class="profile-info">
                                         <div class="profile-avatar">
-                                            <div class="avatar large">RS</div>
+                                            <div class="avatar large">JD</div>
                                             <button type="button" class="btn btn-secondary btn-sm">
                                                 <span class="material-icons">photo_camera</span>
                                                 Change Photo
@@ -186,17 +135,17 @@
                                             <div class="form-row">
                                                 <div class="form-group">
                                                     <label for="fullName">Full Name</label>
-                                                    <input type="text" id="fullName" value="Rajesh Sharma" class="form-control">
+                                                    <input type="text" id="fullName" value="John Doe" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="employeeId">Employee ID</label>
-                                                    <input type="text" id="employeeId" value="RBO-2023-4578" class="form-control" readonly>
+                                                    <input type="text" id="employeeId" value="SLO-2023-4578" class="form-control" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group">
                                                     <label for="email">Email Address</label>
-                                                    <input type="email" id="email" value="rajesh.sharma@ruralbank.in" class="form-control">
+                                                    <input type="email" id="email" value="john.doe@farmcredit.in" class="form-control">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="phone">Phone Number</label>
@@ -206,7 +155,7 @@
                                             <div class="form-row">
                                                 <div class="form-group">
                                                     <label for="designation">Designation</label>
-                                                    <input type="text" id="designation" value="Rural Bank Officer" class="form-control" readonly>
+                                                    <input type="text" id="designation" value="Senior Loan Officer" class="form-control" readonly>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="branch">Branch</label>
@@ -225,9 +174,9 @@
                             </div>
                         </div>
                         
-                        <div class="card">
+                        <div class="grid-card">
                             <div class="card-header">
-                                <h3>Regional Settings</h3>
+                                <h2>Regional Settings</h2>
                             </div>
                             <div class="card-body">
                                 <form id="regionalSettingsForm">
@@ -251,17 +200,18 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group">
+                                            <label for="themeSelect">Theme</label>
+                                            <select id="themeSelect" class="form-control">
+                                                <option value="light" selected>Light</option>
+                                                <option value="dark">Dark</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="dateFormat">Date Format</label>
                                             <select id="dateFormat" class="form-control">
                                                 <option value="dd/mm/yyyy" selected>DD/MM/YYYY</option>
                                                 <option value="mm/dd/yyyy">MM/DD/YYYY</option>
                                                 <option value="yyyy-mm-dd">YYYY-MM-DD</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="currency">Currency</label>
-                                            <select id="currency" class="form-control">
-                                                <option value="INR" selected>Indian Rupee (₹)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -584,7 +534,7 @@
                                         <p>Choose your preferred theme</p>
                                     </div>
                                     <div class="setting-action">
-                                        <select class="form-control">
+                                        <select class="form-control" id="appThemeSelect">
                                             <option value="light" selected>Light</option>
                                             <option value="dark">Dark</option>
                                             <option value="system">System Default</option>

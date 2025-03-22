@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   initSidebar();
   initNotifications();
   initTooltips();
+  initThemeToggle();
+  initDatepickers();
   updateLastUpdated();
 });
 
@@ -135,6 +137,91 @@ function initTooltips() {
   
   // We don't need to add event listeners for tooltips
   // CSS handles the tooltip display with :hover pseudo-class
+}
+
+/**
+ * Initialize theme toggle functionality
+ */
+function initThemeToggle() {
+  const themeSwitch = document.getElementById('themeSwitch');
+  const appThemeSelect = document.getElementById('appThemeSelect');
+  
+  // Get saved theme from local storage
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  
+  // Apply saved theme
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  
+  // Set switch and select values based on saved theme
+  if (themeSwitch) {
+    themeSwitch.checked = savedTheme === 'dark';
+  }
+  
+  if (appThemeSelect) {
+    appThemeSelect.value = savedTheme;
+  }
+  
+  // Apply theme to document and set meta tags
+  applyTheme(savedTheme);
+  
+  // Add event listeners for theme changes
+  if (themeSwitch) {
+    themeSwitch.addEventListener('change', function() {
+      const theme = this.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      // Sync with dropdown if it exists
+      if (appThemeSelect) {
+        appThemeSelect.value = theme;
+      }
+      
+      applyTheme(theme);
+      
+      // Dispatch theme changed event for components that need to update
+      document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+    });
+  }
+  
+  if (appThemeSelect) {
+    appThemeSelect.addEventListener('change', function() {
+      const theme = this.value;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      // Sync with toggle switch if it exists
+      if (themeSwitch) {
+        themeSwitch.checked = theme === 'dark';
+      }
+      
+      applyTheme(theme);
+      
+      // Dispatch theme changed event for components that need to update
+      document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+    });
+  }
+}
+
+/**
+ * Apply theme to the document
+ * @param {string} theme - Theme to apply ('light' or 'dark')
+ */
+function applyTheme(theme) {
+  // Set theme attribute on html element
+  document.documentElement.setAttribute('data-theme', theme);
+  
+  // Update meta theme-color for mobile devices
+  const metaThemeColor = document.querySelector('meta[name=theme-color]');
+  if (metaThemeColor) {
+    metaThemeColor.setAttribute('content', theme === 'dark' ? '#121212' : '#FFFFFF');
+  }
+  
+  // Add/remove appropriate classes if needed
+  if (theme === 'dark') {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
 }
 
 /**
@@ -308,4 +395,98 @@ function getUrlParameters() {
   }
   
   return params;
+}
+
+/**
+ * Initialize datepickers
+ */
+function initDatepickers() {
+  // Handle simple date inputs
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  
+  dateInputs.forEach(input => {
+    // Set default value to today if empty
+    if (!input.value) {
+      const today = new Date();
+      const year = today.getFullYear();
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
+      
+      month = month < 10 ? '0' + month : month;
+      day = day < 10 ? '0' + day : day;
+      
+      input.value = `${year}-${month}-${day}`;
+    }
+    
+    // Add change event listener
+    input.addEventListener('change', function() {
+      // Trigger form validation or other actions if needed
+      const event = new Event('input', { bubbles: true });
+      this.dispatchEvent(event);
+    });
+  });
+  
+  // Handle date range selectors
+  const dateRangeSelect = document.getElementById('dateRangeSelect');
+  if (dateRangeSelect) {
+    dateRangeSelect.addEventListener('change', function() {
+      const value = this.value;
+      const startDate = document.getElementById('startDate');
+      const endDate = document.getElementById('endDate');
+      
+      if (!startDate || !endDate) return;
+      
+      const today = new Date();
+      const end = new Date(today);
+      let start = new Date(today);
+      
+      // Set date range based on selection
+      switch(value) {
+        case 'last-30-days':
+          start.setDate(today.getDate() - 30);
+          break;
+        case 'last-90-days':
+          start.setDate(today.getDate() - 90);
+          break;
+        case 'last-6-months':
+          start.setMonth(today.getMonth() - 6);
+          break;
+        case 'last-year':
+          start.setFullYear(today.getFullYear() - 1);
+          break;
+        case 'custom':
+          // Don't change the dates, let user input them
+          return;
+      }
+      
+      // Format dates
+      startDate.value = formatDateForInput(start);
+      endDate.value = formatDateForInput(end);
+      
+      // Trigger change events
+      startDate.dispatchEvent(new Event('change', { bubbles: true }));
+      endDate.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    
+    // Trigger initial selection
+    if (dateRangeSelect.value !== 'custom') {
+      dateRangeSelect.dispatchEvent(new Event('change'));
+    }
+  }
+}
+
+/**
+ * Format date for input value
+ * @param {Date} date - Date object 
+ * @returns {string} Formatted date string (YYYY-MM-DD)
+ */
+function formatDateForInput(date) {
+  const year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+  
+  return `${year}-${month}-${day}`;
 } 

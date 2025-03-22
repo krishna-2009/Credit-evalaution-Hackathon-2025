@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize toggle switches
     initToggleSwitches();
+    
+    // Sync theme selectors
+    syncThemeSelectors();
 });
 
 /**
@@ -322,4 +325,31 @@ function showToast(message, type = 'info') {
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+}
+
+/**
+ * Sync theme selectors between the regional settings and display settings sections
+ */
+function syncThemeSelectors() {
+    const mainThemeSelect = document.getElementById('themeSelect');
+    const appThemeSelect = document.getElementById('appThemeSelect');
+    
+    if (mainThemeSelect && appThemeSelect) {
+        // Apply saved theme to both selectors
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        mainThemeSelect.value = savedTheme;
+        appThemeSelect.value = savedTheme;
+        
+        // Sync the selectors when either changes
+        mainThemeSelect.addEventListener('change', function() {
+            appThemeSelect.value = this.value;
+        });
+        
+        appThemeSelect.addEventListener('change', function() {
+            mainThemeSelect.value = this.value;
+            // Trigger the main theme select change event to update the theme
+            const event = new Event('change');
+            mainThemeSelect.dispatchEvent(event);
+        });
+    }
 } 

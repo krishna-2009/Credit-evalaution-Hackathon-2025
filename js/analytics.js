@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initExportReport();
   initSidebarToggle();
   initNotificationToggle();
+  initDateRangePicker();
 });
 
 /**
@@ -30,55 +31,25 @@ function initApplicationsTrendChart() {
       datasets: [
         {
           label: 'Total Applications',
-          data: [65, 72, 86, 81, 90, 103, 95, 112],
+          data: [65, 80, 87, 78, 85, 95, 90, 105],
           borderColor: '#4CAF50',
           backgroundColor: 'rgba(76, 175, 80, 0.1)',
-          tension: 0.4,
+          borderWidth: 2,
+          tension: 0.3,
           fill: true
         },
         {
           label: 'Approved Applications',
-          data: [42, 55, 66, 62, 73, 82, 76, 88],
+          data: [45, 55, 65, 60, 68, 75, 70, 85],
           borderColor: '#1976D2',
           backgroundColor: 'rgba(25, 118, 210, 0.1)',
-          tension: 0.4,
+          borderWidth: 2,
+          tension: 0.3,
           fill: true
         }
       ]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-        },
-        title: {
-          display: false
-        }
-      },
-      interaction: {
-        mode: 'nearest',
-        axis: 'x',
-        intersect: false
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
+    options: getChartOptions('Number of Applications')
   });
 }
 
@@ -92,43 +63,33 @@ function initLoanDistributionChart() {
   const chart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: ['Crop Loans', 'Equipment Purchase', 'Land Development', 'Irrigation', 'Storage Facility', 'Others'],
+      labels: ['Crop Loan', 'Equipment Purchase', 'Land Development', 'Irrigation', 'Livestock'],
       datasets: [
         {
-          data: [35, 25, 15, 10, 8, 7],
+          data: [45, 25, 15, 10, 5],
           backgroundColor: [
-            '#4CAF50',
-            '#1976D2',
-            '#FFC107',
-            '#9C27B0',
-            '#FF5722',
-            '#607D8B'
-          ],
-          borderWidth: 1
+            '#4CAF50', '#1976D2', '#FFC107', '#9C27B0', '#FF5722'
+          ]
         }
       ]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'right',
           labels: {
-            boxWidth: 12,
-            padding: 15
+            font: {
+              family: 'Poppins'
+            },
+            color: getCssVariable('--text-color')
           }
         },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const label = context.label || '';
-              const value = context.formattedValue;
-              return `${label}: ${value}%`;
-            }
-          }
+        title: {
+          display: false
         }
-      },
-      cutout: '60%'
+      }
     }
   });
 }
@@ -143,58 +104,18 @@ function initCreditScoreChart() {
   const chart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Poor (300-549)', 'Fair (550-649)', 'Good (650-749)', 'Excellent (750-850)'],
+      labels: ['Below 600', '600-650', '650-700', '700-750', 'Above 750'],
       datasets: [
         {
-          label: 'Farmer Count',
-          data: [62, 148, 253, 87],
+          label: 'Farmers',
+          data: [15, 30, 40, 25, 10],
           backgroundColor: [
-            '#F44336',
-            '#FFC107',
-            '#4CAF50',
-            '#1976D2'
-          ],
-          borderWidth: 0,
-          borderRadius: 5
+            '#F44336', '#FF9800', '#FFC107', '#8BC34A', '#4CAF50'
+          ]
         }
       ]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const label = context.dataset.label || '';
-              const value = context.formattedValue;
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const percentage = Math.round((context.raw / total) * 100);
-              return `${label}: ${value} (${percentage}%)`;
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
-          },
-          title: {
-            display: true,
-            text: 'Number of Farmers'
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
+    options: getChartOptions('Number of Farmers')
   });
 }
 
@@ -211,55 +132,18 @@ function initCashFlowChart() {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
       datasets: [
         {
-          label: 'Disbursed Amount',
-          data: [2.4, 2.8, 3.1, 2.6, 3.4, 3.7, 3.2, 3.9],
-          backgroundColor: '#4CAF50',
-          borderWidth: 0,
-          borderRadius: 5
+          label: 'Disbursements',
+          data: [120, 150, 180, 155, 140, 175, 165, 190],
+          backgroundColor: '#4CAF50'
         },
         {
-          label: 'Repaid Amount',
-          data: [1.8, 2.1, 2.4, 2.2, 2.7, 2.9, 2.6, 3.0],
-          backgroundColor: '#1976D2',
-          borderWidth: 0,
-          borderRadius: 5
+          label: 'Repayments',
+          data: [80, 95, 110, 115, 120, 130, 135, 145],
+          backgroundColor: '#1976D2'
         }
       ]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        tooltip: {
-          callbacks: {
-            label: function(context) {
-              const label = context.dataset.label || '';
-              const value = context.formattedValue;
-              return `${label}: ₹${value} Cr`;
-            }
-          }
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
-          },
-          title: {
-            display: true,
-            text: 'Amount (₹ Crores)'
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    }
+    options: getChartOptions('Amount (₹ thousand)')
   });
 }
 
@@ -425,5 +309,154 @@ function initNotificationToggle() {
       }
     });
   }
+}
+
+function initDateRangePicker() {
+  const dateRangeSelect = document.getElementById('dateRangeSelect');
+  const customDateInputs = document.getElementById('customDateInputs');
+  
+  if (dateRangeSelect) {
+    dateRangeSelect.addEventListener('change', function() {
+      // Show custom date inputs if "Custom Range" is selected
+      if (this.value === 'custom' && customDateInputs) {
+        customDateInputs.style.display = 'flex';
+      } else if (customDateInputs) {
+        customDateInputs.style.display = 'none';
+      }
+    });
+    
+    // Trigger initial state
+    if (dateRangeSelect.value === 'custom' && customDateInputs) {
+      customDateInputs.style.display = 'flex';
+    } else if (customDateInputs) {
+      customDateInputs.style.display = 'none';
+    }
+  }
+}
+
+// Helper function to get CSS variable value
+function getCssVariable(varName) {
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+}
+
+// Common chart options
+function getChartOptions(yAxisLabel) {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          padding: 20,
+          font: {
+            family: 'Poppins',
+            size: 12
+          },
+          color: getCssVariable('--text-color')
+        }
+      },
+      tooltip: {
+        bodyFont: {
+          family: 'Poppins',
+          size: 14
+        },
+        titleFont: {
+          family: 'Poppins',
+          size: 14,
+          weight: 'bold'
+        },
+        padding: 10,
+        backgroundColor: getCssVariable('--card-bg'),
+        titleColor: getCssVariable('--text-color'),
+        bodyColor: getCssVariable('--text-color'),
+        borderColor: getCssVariable('--border-color'),
+        borderWidth: 1
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: getCssVariable('--text-color'),
+          font: {
+            family: 'Poppins',
+            size: 12
+          },
+          padding: 8
+        },
+        grid: {
+          color: getCssVariable('--gray-200'),
+          drawBorder: false
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: yAxisLabel,
+          color: getCssVariable('--text-color'),
+          font: {
+            family: 'Poppins',
+            size: 14,
+            weight: 'bold'
+          },
+          padding: {
+            bottom: 10
+          }
+        },
+        ticks: {
+          color: getCssVariable('--text-color'),
+          font: {
+            family: 'Poppins',
+            size: 12
+          },
+          padding: 8
+        },
+        grid: {
+          color: getCssVariable('--gray-200'),
+          drawBorder: false
+        }
+      }
+    },
+    animation: {
+      duration: 1000,
+      easing: 'easeOutQuart'
+    },
+    layout: {
+      padding: {
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 10
+      }
+    }
+  };
+}
+
+// Refresh charts when theme changes
+function refreshCharts() {
+  Chart.instances.forEach(chart => {
+    if (chart.options.scales) {
+      // Update scales colors
+      if (chart.options.scales.x) {
+        chart.options.scales.x.ticks.color = getCssVariable('--text-color');
+        chart.options.scales.x.grid.color = getCssVariable('--gray-200');
+      }
+      if (chart.options.scales.y) {
+        chart.options.scales.y.ticks.color = getCssVariable('--text-color');
+        chart.options.scales.y.grid.color = getCssVariable('--gray-200');
+        if (chart.options.scales.y.title) {
+          chart.options.scales.y.title.color = getCssVariable('--text-color');
+        }
+      }
+    }
+    
+    // Update legend colors
+    if (chart.options.plugins && chart.options.plugins.legend) {
+      chart.options.plugins.legend.labels.color = getCssVariable('--text-color');
+    }
+    
+    chart.update();
+  });
 }
 

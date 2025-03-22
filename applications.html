@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications - Agricultural Credit System</title>
+    <title>Applications - FarmCredit</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/improved-styles.css">
     <link rel="stylesheet" href="css/toast.css">
@@ -14,21 +14,16 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-container">
-                    <img src="img/logo.svg" alt="AgriFinance Logo">
-                    <span class="logo-text">AgriFinance</span>
-                </div>
-                <button class="sidebar-toggle">
-                    <span class="material-icons">menu</span>
-                </button>
+            <div class="logo">
+                <span class="material-icons">eco</span>
+                <h2>FarmCredit</h2>
             </div>
             
             <div class="user-info">
-                <div class="avatar">RS</div>
+                <div class="avatar">JD</div>
                 <div class="user-details">
-                    <h3>Rajesh Sharma</h3>
-                    <p>Rural Bank Officer</p>
+                    <h3>John Doe</h3>
+                    <p>Senior Loan Officer</p>
                 </div>
             </div>
             
@@ -65,9 +60,9 @@
                 </li>
             </ul>
             
-            <div class="sidebar-footer">
-                <a href="#" class="logout">
-                    <span class="material-icons">exit_to_app</span>
+            <div class="logout">
+                <a href="index.html">
+                    <span class="material-icons">logout</span>
                     <span>Logout</span>
                 </a>
             </div>
@@ -75,79 +70,27 @@
         
         <!-- Main Content -->
         <div class="main-content">
-            <div class="top-bar">
-                <div class="search-container">
-                    <span class="material-icons">search</span>
-                    <input type="text" placeholder="Search applications..." id="applicationSearch">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <h1>Loan Applications</h1>
+                    <p>Manage and process farmer loan applications</p>
                 </div>
-                
-                <div class="top-bar-right">
-                    <div class="weather-widget" data-tooltip="Local weather conditions">
-                        <span class="material-icons">wb_sunny</span>
-                        <span class="temperature">32°C</span>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <span class="material-icons">search</span>
+                        <input type="text" placeholder="Search applications..." id="applicationSearch">
                     </div>
-                    
-                    <div class="notification-container">
-                        <button class="notification-bell" data-tooltip="Notifications">
-                            <span class="material-icons">notifications</span>
-                            <span class="notification-badge">3</span>
-                        </button>
-                        
-                        <div class="notification-dropdown">
-                            <div class="notification-header">
-                                <h3>Notifications</h3>
-                                <button class="mark-all-read">Mark all as read</button>
-                            </div>
-                            <div class="notification-list">
-                                <div class="notification-item unread">
-                                    <div class="notification-icon">
-                                        <span class="material-icons">description</span>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p class="notification-title">New Application</p>
-                                        <p class="notification-text">Sanjay Patel has submitted a new loan application</p>
-                                        <p class="notification-time">20 mins ago</p>
-                                    </div>
-                                </div>
-                                <div class="notification-item unread">
-                                    <div class="notification-icon">
-                                        <span class="material-icons">check_circle</span>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p class="notification-title">Application Approved</p>
-                                        <p class="notification-text">Mohan Gupta's loan has been approved</p>
-                                        <p class="notification-time">1 hour ago</p>
-                                    </div>
-                                </div>
-                                <div class="notification-item">
-                                    <div class="notification-icon">
-                                        <span class="material-icons">loop</span>
-                                    </div>
-                                    <div class="notification-content">
-                                        <p class="notification-title">Application Updated</p>
-                                        <p class="notification-text">Geeta Devi's application has been updated</p>
-                                        <p class="notification-time">Yesterday</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="notification-footer">
-                                <a href="#">View all notifications</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="user-dropdown-container">
-                        <button class="user-dropdown-toggle">
-                            <div class="avatar">RS</div>
-                        </button>
+                    <div class="notification" data-tooltip="Notifications">
+                        <span class="material-icons">notifications</span>
+                        <span class="badge">3</span>
                     </div>
                 </div>
-            </div>
+            </header>
             
             <div class="content-wrapper">
-                <div class="page-header">
-                    <h1>Loan Applications</h1>
-                    <div class="header-actions">
+                <div class="action-bar">
+                    <div class="action-buttons">
                         <button class="btn btn-primary" id="newApplicationBtn">
                             <span class="material-icons">add</span>
                             New Application
@@ -198,7 +141,7 @@
                 </div>
                 
                 <!-- Applications Table -->
-                <div class="applications-container">
+                <div class="grid-card applications-container">
                     <div class="table-toolbar">
                         <div class="table-info">
                             <span>Showing <strong>10</strong> of <strong>35</strong> applications</span>
@@ -245,13 +188,13 @@
                                     <td>720</td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="action-btn" data-tooltip="View details">
+                                            <button class="action-btn view-btn" data-tooltip="View details">
                                                 <span class="material-icons">visibility</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Edit application">
+                                            <button class="action-btn edit-btn" data-tooltip="Edit application">
                                                 <span class="material-icons">edit</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Delete application">
+                                            <button class="action-btn delete-btn" data-tooltip="Delete application">
                                                 <span class="material-icons">delete</span>
                                             </button>
                                         </div>
@@ -268,13 +211,13 @@
                                     <td>685</td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="action-btn" data-tooltip="View details">
+                                            <button class="action-btn view-btn" data-tooltip="View details">
                                                 <span class="material-icons">visibility</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Edit application">
+                                            <button class="action-btn edit-btn" data-tooltip="Edit application">
                                                 <span class="material-icons">edit</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Delete application">
+                                            <button class="action-btn delete-btn" data-tooltip="Delete application">
                                                 <span class="material-icons">delete</span>
                                             </button>
                                         </div>
@@ -291,13 +234,13 @@
                                     <td>740</td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="action-btn" data-tooltip="View details">
+                                            <button class="action-btn view-btn" data-tooltip="View details">
                                                 <span class="material-icons">visibility</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Edit application">
+                                            <button class="action-btn edit-btn" data-tooltip="Edit application">
                                                 <span class="material-icons">edit</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Delete application">
+                                            <button class="action-btn delete-btn" data-tooltip="Delete application">
                                                 <span class="material-icons">delete</span>
                                             </button>
                                         </div>
@@ -314,13 +257,13 @@
                                     <td>580</td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="action-btn" data-tooltip="View details">
+                                            <button class="action-btn view-btn" data-tooltip="View details">
                                                 <span class="material-icons">visibility</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Edit application">
+                                            <button class="action-btn edit-btn" data-tooltip="Edit application">
                                                 <span class="material-icons">edit</span>
                                             </button>
-                                            <button class="action-btn" data-tooltip="Delete application">
+                                            <button class="action-btn delete-btn" data-tooltip="Delete application">
                                                 <span class="material-icons">delete</span>
                                             </button>
                                         </div>
@@ -330,31 +273,37 @@
                         </table>
                     </div>
                     
-                    <div class="table-pagination">
+                    <!-- Pagination -->
+                    <div class="pagination-container">
                         <div class="pagination-info">
-                            <span>Showing 1-10 of 35 applications</span>
+                            Showing 1 to 4 of 4 entries
                         </div>
-                        <div class="pagination-controls">
-                            <button class="pagination-btn" disabled>
-                                <span class="material-icons">chevron_left</span>
-                            </button>
-                            <button class="pagination-btn active">1</button>
-                            <button class="pagination-btn">2</button>
-                            <button class="pagination-btn">3</button>
-                            <button class="pagination-btn">4</button>
-                            <button class="pagination-btn">
-                                <span class="material-icons">chevron_right</span>
-                            </button>
-                        </div>
-                        <div class="pagination-options">
-                            <label for="rowsPerPage">Rows per page:</label>
-                            <select id="rowsPerPage">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                        </div>
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span class="material-icons">chevron_left</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">4</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span class="material-icons">chevron_right</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

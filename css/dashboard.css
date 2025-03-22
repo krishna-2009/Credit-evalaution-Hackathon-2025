@@ -676,4 +676,42 @@ header {
     .application-actions {
         margin-left: 46px;
     }
+}
+
+/* Analytics Grid Layout */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.analytics-grid .chart-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.analytics-row > div {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 1200px) {
+  .analytics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
 } 
