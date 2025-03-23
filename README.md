@@ -47,7 +47,8 @@ Feel free to submit pull requests with improvements or new features. Please ensu
 ## Developed By
 Team Name: Manual Matics  
 Members: 
-- Krishna Patel (@krishna-2009)
+
 - Het Patel (@het-patel-0506)
+- Krishna Patel (@krishna-2009)
 - Aagam Shah (@Aagam2)
 - Dhruv Hingu (@dhruvhingu)
