@@ -5,6 +5,8 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
+from typing import List, Optional
+from pydantic import BaseModel, Field
 
 from credit_score_with_rec import calculate_new_credit_score, recommend_loan
 
@@ -19,7 +21,6 @@ engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-from pydantic import BaseModel
 
 class UserCreate(BaseModel):
     name: str
@@ -27,13 +28,50 @@ class UserCreate(BaseModel):
     role: str
     password: str
 
-class farmerMetadata(BaseModel):
-    current_score: int
-    district: str
-    crop_type: str
+class FarmerMetadata(BaseModel):
+    # Base credit score field
+    current_score: int = Field(500, description="Base credit score")
+    
+    # Basic farmer info
+    farmerName: Optional[str] = None
+    farmSize: Optional[float] = None
+    farmAge: Optional[int] = None
+    ownershipStatus: Optional[str] = None
+    
+    # Location and climate info
+    district: str  # This is the location field
+    soilType: Optional[str] = None
+    waterSource: Optional[str] = None
+    climateIssues: Optional[List[str]] = None
+    
+    # Crop info
+    crop_type: str  # Primary crop
+    lastYieldAmount: Optional[float] = None
+    techniques: Optional[List[str]] = None
+    equipmentOwned: Optional[str] = None
+    
+    # Time-related
     month: int
-
-
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "current_score": 500,
+                "farmerName": "Ramesh Kumar",
+                "farmSize": 15,
+                "farmAge": 8,
+                "ownershipStatus": "owned",
+                "district": "Ahmedabad",
+                "soilType": "loam",
+                "waterSource": "well",
+                "climateIssues": ["drought", "heatwave"],
+                "crop_type": "Wheat",
+                "lastYieldAmount": 2.5,
+                "techniques": ["noTill", "precision"],
+                "equipmentOwned": "partial",
+                "month": 5
+            }
+        }
 
 class User(Base):
     __tablename__ = "user"
@@ -54,7 +92,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/api/userCreate",response_model=None)
+@app.post("/api/userCreate", response_model=None)
 def save_farmer(data: UserCreate):
     db = SessionLocal()
     new_farmer = User(
@@ -67,13 +105,22 @@ def save_farmer(data: UserCreate):
     db.commit()
     return JSONResponse(status_code=200,
         content={"message": "User created successfully."})
-    
 
-@app.post("/api/creditScore",response_model=None)
-def credit_score(data: farmerMetadata):
-    print("data is: ", data)
-    new_credit_score = calculate_new_credit_score(data.current_score, data.district, data.crop_type, data.month)
+@app.post("/api/creditScore", response_model=None)
+def credit_score(data: FarmerMetadata):
+    print("Received farmer data:", data.dict())
+    
+    # Create a dictionary from all submitted form data
+    farmer_data = data.dict()
+    
+    # Calculate the credit score using all form fields
+    new_credit_score = calculate_new_credit_score(farmer_data)
+    
+    # Generate loan recommendation
     recommendation = recommend_loan(new_credit_score, data.crop_type)
-    print(new_credit_score, recommendation)
+    
+    print(f"Calculated credit score: {new_credit_score}")
+    print(f"Recommendation: {recommendation}")
+    
     return JSONResponse(status_code=200,
         content={"new_credit_score": new_credit_score, "recommendation": recommendation})

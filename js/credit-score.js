@@ -147,15 +147,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Collect form data and add additional fields for the API if needed
             const formData = new FormData(form);
             const jsonData = {};
+
+            // Process form data and handle special cases
             formData.forEach((value, key) => {
-                jsonData[key] = value;
+                // For checkbox groups, we need to collect all values
+                if (key === 'climateIssues' || key === 'techniques') {
+                    if (!jsonData[key]) {
+                        jsonData[key] = [];
+                    }
+                    jsonData[key].push(value);
+                } else {
+                    jsonData[key] = value;
+                }
             });
-            // Add any extra fields required by your API (for example, current_score, district, crop_type, month)
-            jsonData.current_score = 500; // Or derive from your app state
-            // You can choose one of the location inputs to pass as district if needed
+
+            // Add required fields for the API
+            jsonData.current_score = 500; // Base score
             jsonData.district = document.getElementById('location').value;
             jsonData.crop_type = document.getElementById('primaryCrop').value;
-            jsonData.month = new Date().getMonth() + 1; // Current month
+            jsonData.month = new Date().getMonth() + 1; // Current month (1-12)
 
             console.log("Sending data to API:", jsonData);
             
