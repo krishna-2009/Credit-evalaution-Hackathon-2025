@@ -7,7 +7,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('creditScoreForm');
     const modal = document.getElementById('scoreModal');
     const closeBtn = document.querySelector('.close-btn');
-    
+
+    // Enable/disable the map search button based on input
+    const pinCodeInput = document.getElementById('Pin_Code');
+    const mapSearchBtn = document.getElementById('mapSearchBtn');
+
+    pinCodeInput.addEventListener('input', function() {
+        if (this.value.trim() !== "") {
+            mapSearchBtn.disabled = false;
+        } else {
+            mapSearchBtn.disabled = true;
+        }
+    });
+
+    // When the map button is clicked, open Google Maps with the pin code search query
+    mapSearchBtn.addEventListener('click', function() {
+        const pinCode = pinCodeInput.value.trim();
+        if (pinCode !== "") {
+            const url = "https://www.google.com/maps/search/" + encodeURIComponent(pinCode);
+            window.open(url, '_blank'); // Opens in a new tab
+        }
+    });
+        
     // Toast notification function
     const showApiMessage = function(message, type = 'error') {
         const toast = document.createElement('div');

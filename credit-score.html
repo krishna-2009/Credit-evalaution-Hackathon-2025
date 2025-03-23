@@ -98,6 +98,16 @@
                             <input type="text" id="location" name="location" placeholder="Enter your address" required>
                         </div>
                         <div class="form-group">
+                            <label for="Pin_Code">Pin Code</label>
+                            <div class="pin-input-container" style="display: flex; align-items: center;">
+                                <input type="text" id="Pin_Code" name="Pin_Code" placeholder="Enter your Pin-Code" required>
+                                <!-- Map button with icon -->
+                                <button type="button" id="mapSearchBtn" class="map-btn" disabled style="margin-left: 5px; background: none; border: none; cursor: pointer;">
+                                    <span class="material-icons">map</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="soilType">Primary Soil Type</label>
                             <select id="soilType" name="soilType" required>
                                 <option value="">Select soil type</option>
@@ -171,6 +181,10 @@
                                 <option value="rented">Rent Equipment</option>
                                 <option value="none">No Modern Equipment</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carbonCredits">Number of Carbon Credits</label>
+                            <input type="number" id="carbonCredits" name="carbonCredits" min="0">
                         </div>
                         <div class="form-buttons">
                             <button type="button" class="prev-btn">Previous</button>
@@ -256,4 +270,4 @@
 
     <script src="js/credit-score.js"></script>
 </body>
-</html> 
+</html>
