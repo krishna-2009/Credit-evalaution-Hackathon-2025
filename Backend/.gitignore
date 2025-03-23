@@ -5,6 +5,7 @@ __pycache__/
 *.pyd
 venv/
 .env
+env/
 
 # Node-related (if you ever add it for frontend tools)
 node_modules/
