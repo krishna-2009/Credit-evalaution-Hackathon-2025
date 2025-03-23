@@ -8,6 +8,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('scoreModal');
     const closeBtn = document.querySelector('.close-btn');
     
+    // Toast notification function
+    const showApiMessage = function(message, type = 'error') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <span class="material-icons">${type === 'error' ? 'error' : 'check_circle'}</span>
+                <span class="message">${message}</span>
+            </div>
+            <span class="material-icons close">close</span>
+        `;
+        document.body.appendChild(toast);
+        
+        // Show the toast
+        setTimeout(() => {
+            toast.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }, 100);
+        
+        // Add close button functionality
+        toast.querySelector('.close').addEventListener('click', () => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        });
+    };
+    
     // Next button functionality
     nextButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -144,29 +175,44 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log("API response:", data);
-                if (data.new_credit_score) {
+                if (data && data.new_credit_score) {
                     // Store score data for modal display
                     const creditScore = Math.round(data.new_credit_score);
                     
                     // Update global variables for animation
                     window.targetScore = creditScore;
-                    window.recommendation = data.recommendation;
+                    window.recommendation = data.recommendation || "";
+                    
+                    console.log("Setting target score to:", window.targetScore);
+                    console.log("Setting recommendation to:", window.recommendation);
                     
                     // Show the modal with animation
                     showModal();
                     
                     // Show success message
-                    window.showApiMessage("Credit score calculated successfully!", "success");
+                    showApiMessage("Credit score calculated successfully!", "success");
                 } else {
                     console.error("No credit score in response:", data);
-                    window.showApiMessage("Error calculating credit score. Using mock data instead.", "error");
-                    useMockData();
+                    showApiMessage("Error calculating credit score. Please check the API response.", "error");
+                    
+                    // Set fallback values
+                    window.targetScore = 700;
+                    window.recommendation = "No recommendation available from API. Please try again later.";
+                    showModal();
                 }
             })
             .catch(error => {
                 console.error("API Error:", error);
-                window.showApiMessage("API unavailable. Using mock data instead.", "error");
-                useMockData();
+                showApiMessage("API unavailable. Using fallback data.", "error");
+                
+                // Set fallback values
+                window.targetScore = 700;
+                window.recommendation = "API unavailable. Please try again later.";
+                showModal();
+                
+                // Reset button state early to allow retrying
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Credit Score';
             })
             .finally(() => {
                 // Reset button state
@@ -188,26 +234,58 @@ document.addEventListener('DOMContentLoaded', function() {
     function showModal() {
         modal.style.display = 'flex';
         
-        // Animate score number
+        // Get the target score
         const scoreNumber = document.querySelector('.score-number');
-        const targetScore = window.targetScore;
-        let currentScore = 0;
+        const targetScore = window.targetScore || 700;
         
+        console.log("In showModal, target score is:", targetScore);
+        
+        // Set score label
+        const scoreLabel = getScoreLabel(targetScore);
+        const scoreLabelElement = document.querySelector('.score-label');
+        if (scoreLabelElement) {
+            scoreLabelElement.textContent = scoreLabel;
+        }
+        
+        // Set score description
+        const scoreDescription = document.querySelector('.score-description');
+        if (scoreDescription) {
+            scoreDescription.textContent = `Based on your farm data, you have ${scoreLabel.toLowerCase()} creditworthiness!`;
+        }
+        
+        // Display recommendation if available
+        if (window.recommendation) {
+            console.log("Showing recommendation:", window.recommendation);
+            const recommendationContainer = document.querySelector('.recommendation-container');
+            const recommendationText = document.querySelector('.recommendation-text');
+            
+            if (recommendationContainer && recommendationText) {
+                recommendationText.textContent = window.recommendation;
+                recommendationContainer.style.display = 'block';
+            }
+        }
+        
+        // Animate score counter
+        let currentScore = 0;
         const scoreAnimation = setInterval(() => {
             if (currentScore >= targetScore) {
                 clearInterval(scoreAnimation);
                 return;
             }
             
-            currentScore += 10;
+            // Increment by appropriate amount based on score
+            const increment = Math.max(5, Math.floor(targetScore / 100));
+            currentScore += increment;
             if (currentScore > targetScore) currentScore = targetScore;
             
-            scoreNumber.textContent = currentScore;
+            if (scoreNumber) {
+                scoreNumber.textContent = currentScore;
+            }
         }, 30);
         
         // Animate factor bars
         document.querySelectorAll('.factor-fill').forEach(bar => {
-            const width = bar.style.width;
+            const width = bar.dataset.width || bar.style.width;
             bar.style.width = '0';
             
             setTimeout(() => {
