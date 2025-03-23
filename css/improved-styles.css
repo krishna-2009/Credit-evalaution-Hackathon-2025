@@ -658,7 +658,7 @@ tr:hover td {
   width: 350px;
   max-width: calc(100vw - 40px);
   overflow: hidden;
-  z-index: 1000; /* Higher z-index to ensure it appears above other elements */
+  z-index: 1000; /* Higher z-index to ensure it appears above Other elements */
   transform-origin: top right;
   transform: scale(0.95);
   opacity: 0;

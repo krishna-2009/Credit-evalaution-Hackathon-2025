@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 jsonData[key] = value;
             });
             // Add any extra fields required by your API (for example, current_score, district, crop_type, month)
-            jsonData.current_score = 700; // Or derive from your app state
+            jsonData.current_score = 500; // Or derive from your app state
             // You can choose one of the location inputs to pass as district if needed
             jsonData.district = document.getElementById('location').value;
             jsonData.crop_type = document.getElementById('primaryCrop').value;

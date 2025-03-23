@@ -71,7 +71,9 @@ def save_farmer(data: UserCreate):
 
 @app.post("/api/creditScore",response_model=None)
 def credit_score(data: farmerMetadata):
+    print("data is: ", data)
     new_credit_score = calculate_new_credit_score(data.current_score, data.district, data.crop_type, data.month)
     recommendation = recommend_loan(new_credit_score, data.crop_type)
+    print(new_credit_score, recommendation)
     return JSONResponse(status_code=200,
         content={"new_credit_score": new_credit_score, "recommendation": recommendation})

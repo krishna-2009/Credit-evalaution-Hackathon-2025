@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add styles for the modal and other dynamic elements
+    // Add styles for the modal and Other dynamic elements
     (function addDynamicStyles() {
         const style = document.createElement('style');
         style.textContent = `

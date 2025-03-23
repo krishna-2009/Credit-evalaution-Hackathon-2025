@@ -420,7 +420,7 @@ function initDatepickers() {
     
     // Add change event listener
     input.addEventListener('change', function() {
-      // Trigger form validation or other actions if needed
+      // Trigger form validation or Other actions if needed
       const event = new Event('input', { bubbles: true });
       this.dispatchEvent(event);
     });
