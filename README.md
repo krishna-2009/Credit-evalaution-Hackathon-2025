@@ -43,3 +43,11 @@ Traditional credit evaluation methods often fail to capture the unique challenge
 
 ## Contributing
 Feel free to submit pull requests with improvements or new features. Please ensure changes adhere to the key requirements and overall project goals for consistent development.
+
+## Developed By
+Team Name: Manual Matics  
+Members: 
+- Krishna Patel (@krishna-2009)
+- Het Patel (@het-patel-0506)
+- Aagam Shah (@Aagam2)
+- Dhruv Hingu (@dhruvhingu)
