@@ -169,8 +169,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             console.log("Sending data to API:", jsonData);
             
-            // Call the API endpoint
-            fetch('http://localhost:8000/api/creditScore', {
+            // Call the API endpoint using relative URL
+            fetch('/api/creditScore', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -179,7 +179,18 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.statusText);
+                    if (response.status === 0) {
+                        // Status 0 typically indicates CORS error
+                        throw new Error('CORS error - API server may not be running or configured correctly');
+                    }
+                    // Try to get error details from the response
+                    return response.json().then(errorData => {
+                        console.error("Server error details:", errorData);
+                        throw new Error(`Server error: ${errorData.message || errorData.error || response.statusText}`);
+                    }).catch(err => {
+                        // If we can't parse the error as JSON, just throw with status
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    });
                 }
                 return response.json();
             })
@@ -192,9 +203,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Update global variables for animation
                     window.targetScore = creditScore;
                     window.recommendation = data.recommendation || "";
+                    window.factors = data.factors || null;
                     
                     console.log("Setting target score to:", window.targetScore);
                     console.log("Setting recommendation to:", window.recommendation);
+                    console.log("Setting factors to:", window.factors);
                     
                     // Show the modal with animation
                     showModal();
@@ -208,16 +221,71 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Set fallback values
                     window.targetScore = 700;
                     window.recommendation = "No recommendation available from API. Please try again later.";
+                    window.factors = null;
                     showModal();
                 }
             })
             .catch(error => {
                 console.error("API Error:", error);
-                showApiMessage("API unavailable. Using fallback data.", "error");
                 
-                // Set fallback values
+                if (error.message.includes('CORS')) {
+                    // Try again without credentials as a fallback
+                    console.log("Retrying without credentials...");
+                    return fetch('/api/creditScore', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        // No credentials here
+                        body: JSON.stringify(jsonData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                console.error("Server error details:", errorData);
+                                throw new Error(`Server error: ${errorData.message || errorData.error || response.statusText}`);
+                            }).catch(err => {
+                                throw new Error('Fallback request failed: ' + response.statusText);
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("API response from fallback:", data);
+                        if (data && data.new_credit_score) {
+                            window.targetScore = Math.round(data.new_credit_score);
+                            window.recommendation = data.recommendation || "";
+                            window.factors = data.factors || null;
+                            showModal();
+                            showApiMessage("Credit score calculated successfully!", "success");
+                        } else {
+                            throw new Error("Invalid response from fallback");
+                        }
+                    })
+                    .catch(fallbackError => {
+                        console.error("Fallback also failed:", fallbackError);
+                        // Continue to the fallback data logic below
+                        throw fallbackError; 
+                    });
+                }
+                
+                // Show error message from API if available
+                const errorMsg = error.message.includes('Server error') ? error.message : "API unavailable. Using fallback data.";
+                showApiMessage(errorMsg, "error");
+                
+                // Set fallback values based on form inputs
+                const cropType = document.getElementById('primaryCrop').value;
                 window.targetScore = 700;
-                window.recommendation = "API unavailable. Please try again later.";
+                window.recommendation = `API unavailable. Please try again later. Based on typical ${cropType} farms, you might qualify for standard loans.`;
+                
+                // Create fallback factor values
+                window.factors = {
+                    location_quality: 85,
+                    soil_health: 92,
+                    water_availability: 78,
+                    climate_resilience: 70
+                };
+                
                 showModal();
                 
                 // Reset button state early to allow retrying
@@ -275,6 +343,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
+        // Update factor percentages if available from API
+        if (window.factors) {
+            console.log("Updating factor percentages:", window.factors);
+            updateFactorBars(window.factors);
+        } else {
+            // Use default values if no API data available
+            const defaultFactors = {
+                location_quality: 85,
+                soil_health: 92,
+                water_availability: 78,
+                climate_resilience: 70
+            };
+            updateFactorBars(defaultFactors);
+        }
+        
         // Animate score counter
         let currentScore = 0;
         const scoreAnimation = setInterval(() => {
@@ -292,8 +375,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 scoreNumber.textContent = currentScore;
             }
         }, 30);
+    }
+    
+    // Update factor bars based on percentages
+    function updateFactorBars(factors) {
+        // Map API factor keys to display names
+        const factorMapping = {
+            'location_quality': 'Location Quality',
+            'soil_health': 'Soil Health',
+            'water_availability': 'Water Availability',
+            'climate_resilience': 'Climate Resilience'
+        };
         
-        // Animate factor bars
+        // Get all factor bars
+        const factorElements = document.querySelectorAll('.factor');
+        
+        // Update each factor bar if present
+        factorElements.forEach(element => {
+            const nameElement = element.querySelector('.factor-name');
+            if (nameElement) {
+                const displayName = nameElement.textContent;
+                // Find matching factor in our data
+                for (const [key, value] of Object.entries(factorMapping)) {
+                    if (value === displayName && factors[key] !== undefined) {
+                        // Update the bar width and value
+                        const fillElement = element.querySelector('.factor-fill');
+                        const valueElement = element.querySelector('.factor-value');
+                        
+                        if (fillElement) {
+                            // Set data attribute for animation
+                            fillElement.dataset.width = `${factors[key]}%`;
+                            // Reset width to 0 for animation
+                            fillElement.style.width = '0';
+                        }
+                        
+                        if (valueElement) {
+                            valueElement.textContent = `${factors[key]}%`;
+                        }
+                        
+                        break;
+                    }
+                }
+            }
+        });
+        
+        // Animate all factor bars
+        animateFactorBars();
+    }
+    
+    // Animate all factor bars
+    function animateFactorBars() {
         document.querySelectorAll('.factor-fill').forEach(bar => {
             const width = bar.dataset.width || bar.style.width;
             bar.style.width = '0';

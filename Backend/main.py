@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine, Column, String, Integer
 from sqlalchemy.orm import sessionmaker, declarative_base
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 import os
 from typing import List, Optional
@@ -86,11 +87,51 @@ app = FastAPI()
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["http://127.0.0.1:5501", "http://localhost:5501", "http://127.0.0.1:5500", "http://localhost:5500"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Set up static file serving
+# Assuming the frontend files are in a parent directory relative to Backend
+frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "")
+app.mount("/css", StaticFiles(directory=os.path.join(frontend_dir, "css")), name="css")
+app.mount("/js", StaticFiles(directory=os.path.join(frontend_dir, "js")), name="js")
+app.mount("/img", StaticFiles(directory=os.path.join(frontend_dir, "img")), name="img")
+
+# Root path to serve index.html
+@app.get("/")
+def read_root():
+    return FileResponse(os.path.join(frontend_dir, "index.html"))
+
+# Serve credit-score.html
+@app.get("/credit-score")
+def credit_score_page():
+    return FileResponse(os.path.join(frontend_dir, "credit-score.html"))
+
+# Serve applications.html
+@app.get("/applications")
+def applications_page():
+    return FileResponse(os.path.join(frontend_dir, "applications.html"))
+
+# Serve credit-score.html (with .html extension)
+@app.get("/credit-score.html")
+def credit_score_page_html():
+    return FileResponse(os.path.join(frontend_dir, "credit-score.html"))
+
+# Serve applications.html (with .html extension)
+@app.get("/applications.html")
+def applications_page_html():
+    return FileResponse(os.path.join(frontend_dir, "applications.html"))
+
+# Serve other HTML pages with .html extension
+@app.get("/{page_name}.html")
+def serve_html_page(page_name: str):
+    file_path = os.path.join(frontend_dir, f"{page_name}.html")
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    return JSONResponse(status_code=404, content={"message": "Page not found"})
 
 @app.post("/api/userCreate", response_model=None)
 def save_farmer(data: UserCreate):
@@ -108,19 +149,37 @@ def save_farmer(data: UserCreate):
 
 @app.post("/api/creditScore", response_model=None)
 def credit_score(data: FarmerMetadata):
-    print("Received farmer data:", data.dict())
-    
-    # Create a dictionary from all submitted form data
-    farmer_data = data.dict()
-    
-    # Calculate the credit score using all form fields
-    new_credit_score = calculate_new_credit_score(farmer_data)
-    
-    # Generate loan recommendation
-    recommendation = recommend_loan(new_credit_score, data.crop_type)
-    
-    print(f"Calculated credit score: {new_credit_score}")
-    print(f"Recommendation: {recommendation}")
-    
-    return JSONResponse(status_code=200,
-        content={"new_credit_score": new_credit_score, "recommendation": recommendation})
+    try:
+        print("Received farmer data:", data.dict())
+        
+        # Create a dictionary from all submitted form data
+        farmer_data = data.dict()
+        
+        # Calculate the credit score using all form fields
+        new_credit_score, factor_percentages = calculate_new_credit_score(farmer_data)
+        
+        # Generate loan recommendation
+        recommendation = recommend_loan(new_credit_score, data.crop_type)
+        
+        print(f"Calculated credit score: {new_credit_score}")
+        print(f"Factor percentages: {factor_percentages}")
+        print(f"Recommendation: {recommendation}")
+        
+        return JSONResponse(status_code=200,
+            content={
+                "new_credit_score": new_credit_score, 
+                "recommendation": recommendation,
+                "factors": factor_percentages
+            })
+    except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"ERROR in credit score calculation: {str(e)}")
+        print(error_details)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": str(e),
+                "message": "An error occurred while calculating credit score"
+            }
+        )
